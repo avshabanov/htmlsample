@@ -1,0 +1,24 @@
+
+.mywgt
+{
+}
+
+
+.mywgt .list
+{
+	list-style: none;	
+}
+
+
+.mywgt .list li
+{
+	padding-left: 10px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.mywgt .nodata
+{
+    background: #E0E0E0;
+    color: #F02010;
+}

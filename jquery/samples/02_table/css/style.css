@@ -1,0 +1,65 @@
+
+body
+{
+	background: #FFFFFF;
+}
+
+h1
+{
+	color: #FF9000;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 18px;
+}
+
+p
+{
+	color: #333333;
+	font-size: 14px;
+}
+
+a
+{
+	color: #2060F0;
+	font-size: 14px;
+}
+
+a:hover
+{
+	color: #5590FF;
+}
+
+a:visited
+{
+	color: #F000E0;
+}
+
+/* table styles */
+table
+{
+	border-collapse: collapse;	
+}
+
+th
+{
+    background: #E5E5E5;
+	color: #444444;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #B0B0B0;
+    white-space: nowrap;
+    width: auto;
+}
+
+td
+{
+    font-size: 12px;
+    padding: 4px;
+    border-bottom: 1px solid #222222;
+    overflow: hidden;
+}
+
+.odd-row
+{
+	background: #EEDDDD;
+}
