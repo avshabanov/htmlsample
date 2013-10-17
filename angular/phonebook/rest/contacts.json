@@ -1,0 +1,10 @@
+[
+    {"name": "Alice", "phone": "7005103420", "note": "Real estate agent",
+     "avatarUrl": "http://www.famfamfam.com/lab/icons/silk/icons/car.png"},
+    {"name": "Bob", "phone": "7003104578",
+     "avatarUrl": "http://www.famfamfam.com/lab/icons/silk/icons/cd.png"},
+    {"name": "David", "phone": "7004421118", "note": "Janitor, comes every Tuesday",
+     "avatarUrl": "http://www.famfamfam.com/lab/icons/silk/icons/camera.png"},
+    {"name": "Eva", "phone": "7001087944", "note": "Receptionist, works in the same company with Alice",
+     "avatarUrl": "http://www.famfamfam.com/lab/icons/silk/icons/cake.png" }
+]

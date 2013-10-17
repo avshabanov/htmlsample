@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" ng-app="phonebookApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Phonebook App</title>
+
+    <!-- Booststrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="css/main.css" type="text/css"/>
+
+    <!-- Angurlar JS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
+    <script src="js/controllers.js"></script>
+</head>
+<body ng-controller="ContactListCtrl">
+    <div class="well">
+        <p>Contact List</p>
+    </div>
+    <ul>
+        <li ng-repeat="contact in contacts">
+            <span>{{contact.name}}</span>
+            <p>{{contact.note}}</p>
+        </li>
+    </ul>
+    <p>Total number of contacts: 2</p>
+</body>
+</html>
