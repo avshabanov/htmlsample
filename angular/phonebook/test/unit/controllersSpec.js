@@ -15,5 +15,5 @@ test("Test controller", function () {
     $controller("ContactListCtrl", {
         $scope: testScope
     });
-    equal(3, testScope.contacts.length);
+    equal(4, testScope.contacts.length);
 });
