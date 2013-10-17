@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-framework="angularjs" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Hello Page</title>
+
+    <!-- Booststrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css"/>
+
+    <style>
+        body {
+            padding: 40px;
+        }
+    </style>
+
+    <!-- Angurlar JS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <div class="well">
+        <label>Name:</label>
+        <input type="text" ng-model="yourName" placeholder="Enter a name here" id="name-input">
+        <hr/>
+        <p>Hello {{yourName}}!</p>
+    </div>
+</body>
+</html>
