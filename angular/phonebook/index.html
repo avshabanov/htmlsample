@@ -10,7 +10,10 @@
 
     <!-- Angurlar JS -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
+    <script src="js/module.js"></script>
+    <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/main.js"></script>
 </head>
 <body ng-controller="ContactListCtrl">
     <div class="container">
@@ -28,11 +31,12 @@
             </div>
             <div class="span10">
                 <div class="well">
-                    <p>Contacts in group: <strong class="text-info">{{contactGroup}}</strong></p>
+                    <p>Contacts in group: <strong class="text-info">{{contactData.contactGroup}}</strong></p>
                 </div>
                 <!--Body content-->
                 <ul class="contacts">
-                    <li ng-repeat="contact in contacts | filter:query | orderBy:orderProp">
+                    <li ng-repeat="contact in contactData.contacts | filter:query | orderBy:orderProp">
+                        <a href="#" class="thumb"><img ng-src="{{contact.avatarUrl}}"></a>
                         <span>{{contact.name}} - <span class="text-info">{{contact.phone}}</span></span>
                         <p class="text-muted">{{contact.note}}</p>
                     </li>
