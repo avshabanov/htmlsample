@@ -1,14 +1,15 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
 *.out
 *.pid
 *.gz
 
-pids
 logs
-results
 
-npm-debug.log
+# Java project convention folder structure
+target
+
+# Idea
+.idea
+*.ipr
+*.iws
+*.iml
+
