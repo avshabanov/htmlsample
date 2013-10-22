@@ -5,12 +5,15 @@
 
     <property name="app.startupModule" value="hi.HiApp" />
 
+
     <property environment="env"/>
 
-    <!-- Configure path to GWT SDK -->
+    <!-- Configure SDK paths -->
     <property name="gwt.sdk" location="${env.HOME}/opt/sdk/gwt-2.5.1" />
+    <property name="m2.repo" value="${env.HOME}/.m2/repository" />
 
-
+    <property name="test.classes" value="target/test/classes" />
+    <property name="test.report" value="target/test/report" />
 
     <target name="prepare"/>
 
@@ -21,9 +24,14 @@
     <path id="project.class.path">
         <pathelement location="target/war/WEB-INF/classes"/>
         <pathelement location="${gwt.sdk}/gwt-user.jar"/>
-        <fileset dir="${gwt.sdk}" includes="gwt-dev*.jar"/>
-        <!-- Add any additional non-server libs (such as JUnit) -->
+        <!--<fileset dir="${gwt.sdk}" includes="gwt-dev*.jar"/>-->
+        <!-- Add any additional non-server libs (such as spring) -->
         <fileset dir="target/war/WEB-INF/lib" includes="**/*.jar"/>
+    </path>
+
+    <path id="project.test.class.path">
+        <pathelement location="${m2.repo}/junit/junit/4.8.2/junit-4.8.2.jar"/>
+        <pathelement location="${test.classes}"/>
     </path>
 
     <target name="libs" description="Copy libs to WEB-INF/lib">
@@ -38,7 +46,7 @@
         <javac srcdir="src" includes="**" encoding="UTF-8"
                destdir="target/war/WEB-INF/classes"
                source="1.7" target="1.7" nowarn="true"
-               debug="true" debuglevel="lines,vars,source">
+               debug="true" debuglevel="lines,vars,source" includeantruntime="false">
             <classpath refid="project.class.path"/>
         </javac>
         <copy todir="target/war/WEB-INF/classes">
@@ -91,5 +99,26 @@
             <arg line="${gwt.args}"/>
             <arg value="${app.startupModule}"/>
         </java>
+    </target>
+
+    <target name="test" depends="javac">
+        <mkdir dir="${test.classes}" />
+        <mkdir dir="${test.report}" />
+        <javac srcdir="test" includes="**" encoding="UTF-8"
+               destdir="${test.classes}"
+               source="1.7" target="1.7" nowarn="true"
+               debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+            <classpath refid="project.test.class.path"/>
+        </javac>
+        <junit printsummary="yes" haltonfailure="yes" showoutput="yes">
+            <formatter type="xml"/>
+            <formatter type="plain" usefile="false" />
+            <classpath refid="project.test.class.path"/>
+            <batchtest fork="yes" todir="${test.report}">
+                <fileset dir="test">
+                    <include name="**/*Test*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
     </target>
 </project>

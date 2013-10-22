@@ -11,6 +11,10 @@ public class Hello implements Serializable {
         this.message = message;
     }
 
+    // for serializable means
+    public Hello() {
+    }
+
     public String getMessage() {
         return message;
     }
