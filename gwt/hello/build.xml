@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 <project name="HiApp" basedir="." default="war">
+    <!-- Project-specific variables -->
+    <property name="app.startupModule" value="hi.HiApp" />
+    <property name="app.startupUrl" value="HiApp.html" />
+    <property name="app.warName" value="HiApp.war" />
+
     <!-- Arguments to gwtc and devmode targets -->
     <property name="gwt.args" value="" />
 
-    <property name="app.startupModule" value="hi.HiApp" />
-
-
+    <!-- Catch environment variables to the env name -->
     <property environment="env"/>
 
     <!-- Configure SDK paths -->
@@ -59,6 +62,7 @@
             <classpath>
                 <pathelement location="src"/>
                 <path refid="project.class.path"/>
+		<fileset dir="${gwt.sdk}" includes="gwt-dev*.jar"/>
                 <pathelement location="${gwt.sdk}/validation-api-1.0.0.GA.jar" />
                 <pathelement location="${gwt.sdk}/validation-api-1.0.0.GA-sources.jar" />
             </classpath>
@@ -79,7 +83,7 @@
     </target>
 
     <target name="war" depends="build" description="Create a war file">
-        <zip destfile="target/HiApp.war" basedir="target/war"/>
+        <zip destfile="target/${app.warName}" basedir="target/war"/>
     </target>
 
     <target name="devmode" depends="javac" description="Run development mode">
@@ -92,7 +96,7 @@
             </classpath>
             <jvmarg value="-Xmx256M"/>
             <arg value="-startupUrl"/>
-            <arg value="HiApp.html"/>
+            <arg value="${app.startupUrl}"/>
             <arg line="-war"/>
             <arg value="target/war"/>
             <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
@@ -101,7 +105,7 @@
         </java>
     </target>
 
-    <target name="test" depends="javac">
+    <target name="testCompile" depends="javac">
         <mkdir dir="${test.classes}" />
         <mkdir dir="${test.report}" />
         <javac srcdir="test" includes="**" encoding="UTF-8"
@@ -110,6 +114,9 @@
                debug="true" debuglevel="lines,vars,source" includeantruntime="false">
             <classpath refid="project.test.class.path"/>
         </javac>
+    </target>
+
+    <target name="test" depends="javac, testCompile">
         <junit printsummary="yes" haltonfailure="yes" showoutput="yes">
             <formatter type="xml"/>
             <formatter type="plain" usefile="false" />
