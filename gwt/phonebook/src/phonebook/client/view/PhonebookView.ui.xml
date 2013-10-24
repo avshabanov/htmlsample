@@ -23,7 +23,7 @@
             <p>Contacts in group: <strong ui:field="groupInfo" class="text-info"/></p>
           </div>
           <!--Body content-->
-          <ul ui:field="contactList">
+          <ul ui:field="contactList" class="contact-list">
           </ul>
         </div>
       </div>

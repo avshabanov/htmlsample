@@ -95,7 +95,6 @@
         <pathelement location="${gwt.args}/validation-api-1.0.0.GA.jar" />
         <pathelement location="${gwt.args}/validation-api-1.0.0.GA-sources.jar" />
       </classpath>
-      <!--<jvmarg value="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"/>-->
       <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005" />
 
       <!-- No debug mode -->

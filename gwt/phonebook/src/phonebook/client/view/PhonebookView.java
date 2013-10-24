@@ -1,14 +1,18 @@
 package phonebook.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.*;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.dom.client.UListElement;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.safehtml.shared.SafeUri;
+import com.google.gwt.safehtml.shared.UriUtils;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import phonebook.client.presenter.PhonebookPresenter;
 import phonebook.shared.Contact;
@@ -28,9 +32,16 @@ public final class PhonebookView extends Composite implements PhonebookPresenter
     /**
      * The view-mode template
      */
-    @SafeHtmlTemplates.Template("<a href='#' class=\"thumb\"><img src='{1}'/></a><span>Contact Name - {0}" +
-        "<span class='text-info'>Phone</span></span><p class='text-muted'>{2}</p>")
-    SafeHtml contactWithNote(String name, String imageUrl, String note);
+    @SafeHtmlTemplates.Template("<a href='#' class=\"thumb\"><img src='{2}'/></a>&nbsp;<span>{0} - " +
+        "<span class='text-info'>{1}</span></span><p class='text-muted'>{3}</p>")
+    SafeHtml contactWithNote(String name, String phone, SafeUri imageUrl, String note);
+
+    /**
+     * The view-mode template
+     */
+    @SafeHtmlTemplates.Template("<a href='#' class=\"thumb\"><img src='{2}'/></a>&nbsp;<span>{0} - " +
+        "<span class='text-info'>{1}</span></span>")
+    SafeHtml contactWithoutNote(String name, String phone, SafeUri imageUrl);
   }
 
   private static Templates TEMPLATES = GWT.create(Templates.class);
@@ -54,7 +65,16 @@ public final class PhonebookView extends Composite implements PhonebookPresenter
   public void setContacts(List<Contact> contacts) {
     for (final Contact contact : contacts) {
       final Element element = DOM.createElement("li");
-      element.setInnerSafeHtml(TEMPLATES.contactWithNote(contact.getName(), contact.getImageUrl(), contact.getNote()));
+      final SafeHtml html;
+      if (contact.getNote() != null) {
+        html = TEMPLATES.contactWithNote(contact.getName(), contact.getPhone(),
+            UriUtils.fromString(contact.getImageUrl()), contact.getNote());
+      } else {
+        html = TEMPLATES.contactWithoutNote(contact.getName(), contact.getPhone(),
+            UriUtils.fromString(contact.getImageUrl()));
+      }
+
+      element.setInnerSafeHtml(html);
       contactList.appendChild(element);
     }
   }

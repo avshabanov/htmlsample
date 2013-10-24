@@ -25,6 +25,9 @@ public final class PhonebookPresenter {
 
   private void putViewData() {
     view.setGroupInfo("All");
-    view.setContacts(Arrays.asList(new Contact("Alex", "http://www.famfamfam.com/lab/icons/silk/icons/anchor.png", "My Note")));
+    view.setContacts(Arrays.asList(
+        new Contact("Alex", "800.401.2000", "http://www.famfamfam.com/lab/icons/silk/icons/anchor.png", "Note 1"),
+        new Contact("Bob", "800.401.2001", "http://www.famfamfam.com/lab/icons/silk/icons/bell.png", null),
+        new Contact("Vic", "800.401.2010", "http://www.famfamfam.com/lab/icons/silk/icons/cd.png", "Note 10")));
   }
 }
