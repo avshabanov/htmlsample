@@ -3,7 +3,30 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:cv="urn:import:com.google.gwt.user.cellview.client"
              xmlns:pb="urn:import:phonebook.client.view">
+  <!-- TODO: use g:styleName="container" instead of inner div -->
   <g:HTMLPanel>
-    <p>Phonebook Application On The Go!</p>
+    <div class="container">
+      <div class="row">
+        <div class="span2">
+          <!--Sidebar content-->
+          <div class="form-group">
+            Search: <input ui:field="searchField"/>
+            Sort by:
+            <select>
+              <option value="name">Alphabetical</option>
+              <option value="phone">By Phone</option>
+            </select>
+          </div>
+        </div>
+        <div class="span10">
+          <div class="well">
+            <p>Contacts in group: <strong ui:field="groupInfo" class="text-info"/></p>
+          </div>
+          <!--Body content-->
+          <ul ui:field="contactList">
+          </ul>
+        </div>
+      </div>
+    </div>
   </g:HTMLPanel>
 </ui:UiBinder>
