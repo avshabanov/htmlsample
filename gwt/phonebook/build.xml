@@ -86,7 +86,17 @@
     <zip destfile="target/${app.warName}" basedir="target/war"/>
   </target>
 
-  <target name="devmode" depends="javac" description="Run development mode">
+
+  <target name="set-devmode-dbg-jvmarg">
+    <property name="devmode.jvmarg" value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005 -Xmx256m" />
+  </target>
+
+  <target name="set-devmode-rel-jvmarg">
+    <property name="devmode.jvmarg" value="-Xmx256m" />
+  </target>
+
+  <target name="run-devmode">
+    <fail unless="devmode.jvmarg" message="devmode.jvmarg is not set, use devmode or devmode-dbg targets"/>
     <java failonerror="true" fork="true" classname="com.google.gwt.dev.DevMode">
       <classpath>
         <pathelement location="src"/>
@@ -95,19 +105,18 @@
         <pathelement location="${gwt.args}/validation-api-1.0.0.GA.jar" />
         <pathelement location="${gwt.args}/validation-api-1.0.0.GA-sources.jar" />
       </classpath>
-      <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005" />
-
-      <!-- No debug mode -->
-      <!--<jvmarg value="-Xmx256M"/>-->
+      <jvmarg value="${devmode.jvmarg}" />
       <arg value="-startupUrl"/>
       <arg value="${app.startupUrl}"/>
       <arg line="-war"/>
       <arg value="target/war"/>
-      <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
       <arg line="${gwt.args}"/>
       <arg value="${app.startupModule}"/>
     </java>
   </target>
+
+  <target name="devmode" depends="javac, set-devmode-rel-jvmarg, run-devmode" description="Run development mode"/>
+  <target name="devmode-dbg" depends="javac, set-devmode-dbg-jvmarg, run-devmode" description="Run development mode"/>
 
   <target name="testCompile" depends="javac">
     <mkdir dir="${test.classes}" />
