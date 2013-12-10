@@ -1,6 +1,7 @@
 *.out
 *.pid
 *.gz
+*.swp
 .DS_Store
 
 logs
