@@ -19,4 +19,11 @@ bash ./scripts/run-tests.sh
 ./node_modules/grunt-cli/bin/grunt
 ```
 
+## Intellij Setup
+
+Mark as excluded:
+
+* ``node_modules``
+* ``build``
+
 
