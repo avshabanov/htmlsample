@@ -10,6 +10,20 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    react: {
+      dynamic_mappings: {
+        files: [
+          {
+            expand: true,
+            cwd: 'js/react',
+            src: ['**/*.jsx'],
+            dest: 'build/js',
+            ext: '.js'
+          }
+        ]
+      }
+    },
+
     // (production version)
     uglify: {
       options: {
@@ -36,7 +50,8 @@ module.exports = function(grunt) {
 
   // Load plugins
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-concat'); // TODO: replace with browserify (?)
+  grunt.loadNpmTasks('grunt-react');
 
   // Skeleton preparation task - see also http://gruntjs.com/api/grunt.file
   grunt.file.mkdir('build');
@@ -49,6 +64,7 @@ module.exports = function(grunt) {
 
   // Default tasks
   grunt.registerTask('default', [
+    'react'
     // TODO: enable uglify
     // TODO: enable concat
     //'uglify', 'concat'
