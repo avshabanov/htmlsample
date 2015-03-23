@@ -1,37 +1,23 @@
 module.exports = function(grunt) {
 
   var sources = [
-    'js/module.js', 'js/domain-object.js', 'js/view.js'
+    'node_modules/react/dist/react.js',
+    'build/tmp/app-react-widgets.js',
+    'js/router.js'
   ];
-
-  var target = 'build';
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
     react: {
-      dynamic_mappings: {
-        files: [
-          {
-            expand: true,
-            cwd: 'js/react',
-            src: ['**/*.jsx'],
-            dest: 'build/js',
-            ext: '.js'
-          }
-        ]
-      }
-    },
-
-    // (production version)
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      build: {
-        src: sources,
-        dest: target + '/<%= pkg.name %>.min.js'
+      combined_file_output: {
+        files: {
+          'build/tmp/app-react-widgets.js': [
+            'js/react/hello.jsx',
+            'js/react/footer.jsx'
+          ]
+        }
       }
     },
 
@@ -43,7 +29,18 @@ module.exports = function(grunt) {
       },
       dist: {
         src: sources,
-        dest: target + '/<%= pkg.name %>.js'
+        dest: 'build/js/app.js'
+      }
+    },
+
+    // (production version)
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      build: {
+        src: sources,
+        dest: 'build/js/app.min.js'
       }
     }
   });
@@ -55,19 +52,17 @@ module.exports = function(grunt) {
 
   // Skeleton preparation task - see also http://gruntjs.com/api/grunt.file
   grunt.file.mkdir('build');
+  grunt.file.mkdir('build/tmp'); //< temporary dir for intermediate files
   grunt.file.mkdir('build/js');
-  grunt.file.copy('html/_index.html', 'build/index.html');
 
-  // TODO: move reactjs copy to the concat file task
-  grunt.file.copy('js/router.js', 'build/js/router.js');
-  grunt.file.copy('node_modules/react/dist/react.js', 'build/js/react.js');
+  grunt.file.copy('html/_index.html', 'build/index.html');
 
   // Default tasks
   grunt.registerTask('default', [
-    'react'
-    // TODO: enable uglify
-    // TODO: enable concat
-    //'uglify', 'concat'
+    'react',
+    'concat'
+    // TODO: enable uglify in prod profile
+    //'uglify'
   ]);
 };
 
