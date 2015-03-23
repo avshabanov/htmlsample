@@ -6,6 +6,14 @@ module.exports = function(grunt) {
     'js/router.js'
   ];
 
+  function prepareSkeleton() {
+    // Skeleton preparation task - see also http://gruntjs.com/api/grunt.file
+    grunt.file.mkdir('build');
+    grunt.file.mkdir('build/tmp'); //< temporary dir for intermediate files
+    grunt.file.mkdir('build/js');
+    grunt.file.copy('html/_index.html', 'build/index.html');
+  }
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -39,7 +47,7 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: sources,
+        src: 'build/js/app.js',
         dest: 'build/js/app.min.js'
       }
     }
@@ -47,22 +55,29 @@ module.exports = function(grunt) {
 
   // Load plugins
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-concat'); // TODO: replace with browserify (?)
+  grunt.loadNpmTasks('grunt-contrib-concat'); // TODO: replace with browserify (rationale ?)
   grunt.loadNpmTasks('grunt-react');
 
-  // Skeleton preparation task - see also http://gruntjs.com/api/grunt.file
-  grunt.file.mkdir('build');
-  grunt.file.mkdir('build/tmp'); //< temporary dir for intermediate files
-  grunt.file.mkdir('build/js');
+  prepareSkeleton();
 
-  grunt.file.copy('html/_index.html', 'build/index.html');
+  grunt.registerTask('dist-finalize', 'Helper subtask for dist task that finalizes files structure', function () {
+    grunt.file.copy('build/js/app.min.js', 'build/js/app.js');
+    grunt.file.delete('build/js/app.min.js');
+    grunt.file.delete('build/tmp');
+  });
 
-  // Default tasks
+  // Default task that generates development build
   grunt.registerTask('default', [
-    'react',
-    'concat'
-    // TODO: enable uglify in prod profile
-    //'uglify'
+    'react', 'concat'
   ]);
+
+  // Release task that generates production build
+  grunt.registerTask('dist', [
+    'react', 'concat', 'uglify', 'dist-finalize'
+  ]);
+
+  grunt.registerTask('clean', 'Recursively cleans build folder', function () {
+    grunt.file.delete('build');
+  });
 };
 
