@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>Editable Table Example</title>
+
+    <!-- Booststrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css"/>
+
+    <style>
+        body {
+            padding: 40px;
+        }
+
+        .role-label {
+          margin-right: 0.5em;
+        }
+    </style>
+
+  </head>
+  <body>
+    <h1>Editable Table Example</h1>
+    <div id="container">
+      <p>
+        If you can see this, React is not working right.
+      </p>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
+
+    <script type="text/javascript">
+        var tableData = [
+            {id: 1, name: "bob", active: true, roles: ["one", "two"]},
+            {id: 2, name: "matt", active: false, roles: ["one"]}
+        ];
+    </script>
+
+    <script type="text/jsx">
+        var TableItem = React.createClass({
+          render: function() {
+            var item = this.props.item;
+            var isActive = item.active ? "Yes" : "No";
+            var roles = item.roles.map(function (r) {
+              return (<span key={r} className="role-label label label-primary">{r}</span>);
+            }.bind(this));
+            return (
+              <tr>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{isActive}</td>
+                <td>{roles}</td>
+              </tr>
+            );
+          }
+        });
+
+        var Table = React.createClass({
+          render: function() {
+            var items = this.props.items.map(function (it) {
+              return (<TableItem key={it.id} item={it}/>);
+            }.bind(this));
+
+            return (
+              <table className="table">
+                <thead>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Active</th>
+                  <th>Roles</th>
+                </thead>
+                <tbody>{items}</tbody>
+              </table>
+            );
+          }
+        });
+
+      React.render(
+        <Table items={tableData} />,
+        document.getElementById('container')
+      );
+    </script>
+  </body>
+</html>
+
