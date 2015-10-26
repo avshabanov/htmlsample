@@ -1,7 +1,7 @@
 {
-  "name": "simple-react",
+  "name": "demo-app",
   "version": "0.0.0",
-  "description": "Simplest Flux/React + Babel Example",
+  "description": "Demo Flux App",
   
   "main": "js/app.js",
   
@@ -26,19 +26,10 @@
   },
   
   "scripts": {
-    "start": "watchify -o js/bundle.js -v -d js/app.js",
-    "build": "browserify . -t [envify --NODE_ENV production] -t [babelify --stage 0] | uglifyjs -cm > js/bundle.min.js",
     "test": "jest"
   },
   
   "author": "Alex Shabanov",
-
-  "browserify": {
-    "transform": [
-      ["babelify", { "stage": 0 }],
-      "envify"
-    ]
-  },
   
   "jest": {
     "rootDir": "./js",
