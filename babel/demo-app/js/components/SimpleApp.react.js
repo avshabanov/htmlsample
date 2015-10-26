@@ -18,7 +18,7 @@ class SimpleApp extends Component<{}, {}, State> {
   render(): ?ReactElement {
     return (
       <div>
-        <p>Hello from simple React/Flux + Babel app!</p>
+        <p>Hello from demo <strong>react</strong> webapp!</p>
       </div>
     );
   }

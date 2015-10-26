@@ -28,12 +28,20 @@
   "scripts": {
     "test": "jest"
   },
-  
+
+  "browserify": {
+    "transform": [
+      ["babelify", { "stage": 0 }],
+      "envify"
+    ]
+  },
+
   "author": "Alex Shabanov",
   
   "jest": {
-    "rootDir": "./js",
+    "rootDir": ".",
     "scriptPreprocessor": "./node_modules/babel-jest"
+
   }
 }
 
