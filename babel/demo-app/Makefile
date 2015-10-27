@@ -4,8 +4,9 @@
 
 TO			=	target/demo-app
 NBIN		= ./node_modules/.bin
+PORT		= 8000
 
-.PHONY: clean browserify test watch compile
+.PHONY: clean browserify test watch compile server
 
 
 # Targets
@@ -37,6 +38,9 @@ compile: browserify
 test: node_modules target
 	npm test
 
-
+# TODO: use proxy if you have REST API - -P or --proxy Proxies all requests which can't be resolved locally to the given url. e.g.: -P http://someurl.com
+# See also https://github.com/indexzero/http-server
+server: node_modules target
+	$(NBIN)/http-server $(TO) -p $(PORT) --utc
 
 

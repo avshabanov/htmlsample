@@ -18,13 +18,13 @@ class SimpleApp extends Component<{}, {}, State> {
   render(): ?ReactElement {
     return (
       <div>
-        <p>Hello from demo <strong>react</strong> webapp!</p>
+        <p>Hello from demo <strong>react</strong> webapp!!</p>
       </div>
     );
   }
 }
 
-const TodoAppContainer = Container.create(SimpleApp);
+const SimpleAppContainer = Container.create(SimpleApp);
 
 export default SimpleApp;
 
