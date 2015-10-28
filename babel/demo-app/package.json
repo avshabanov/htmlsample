@@ -41,7 +41,20 @@
   "author": "Alex Shabanov",
   
   "jest": {
-    "rootDir": ".",
+    "rootDir": "",
+
+    "modulePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+
+    "preprocessorIgnorePatterns": [
+      "/node_modules/"
+    ],
+
+    "testPathDirs": [
+      "<rootDir>/js"
+    ],
+
     "scriptPreprocessor": "./node_modules/babel-jest"
   }
 }
