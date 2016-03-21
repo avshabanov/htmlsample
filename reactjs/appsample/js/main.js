@@ -1,19 +1,19 @@
-
 'use strict';
 
-var React = require('react');
+import React, {Component} from 'react';
 
-var ExampleApplication = React.createClass({
-  render: function() {
-    var message =
-      'React has been successfully initialized at ' + this.props.initializedAt + '.';
-
-    return <p>{message}</p>;
+class ExampleApplication extends Component<{}, {}/*Props*/, {}/*State*/> {
+  // state = {}
+  
+  render(): ReactElement {
+    const message = 'React has been successfully initialized at ' + this.props.initializedAt + '.';
+    return (<p>{message}</p>);
   }
-});
+}
+
 
 window.onload = function () {
-  var initStr = new Date().toString();
+  let initStr = new Date().toString();
   React.render(<ExampleApplication initializedAt={initStr} />, document.getElementById('main'));
 }
 
