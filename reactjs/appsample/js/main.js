@@ -13,6 +13,7 @@ class ExampleApplication extends Component<{}, {}/*Props*/, {}/*State*/> {
 
     return (
       <div>
+        <h1>Demo</h1>
         <HelloWidget name={personName} />
         <p>{message}</p>
       </div>

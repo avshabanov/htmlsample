@@ -22,7 +22,11 @@ export default class HelloWidget extends Component<{}, Props, State> {
   }
   
   render(): ReactElement {
-    return (<p><strong>HelloWidget:</strong>&nbsp;<span>{this.state.greeting}</span></p>);
+    return (
+      <div className="well">
+        <p><strong>HelloWidget:</strong>&nbsp;<span>{this.state.greeting}</span></p>
+      </div>
+    );
   }
 
   _onTimeout = () => {
