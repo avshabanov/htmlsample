@@ -4,7 +4,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import HelloWidget from './view/HelloWidget';
 
-
 class ExampleApplication extends Component<{}, {}/*Props*/, {}/*State*/> {
 
   render(): ReactElement {
