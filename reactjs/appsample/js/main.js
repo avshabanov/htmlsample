@@ -1,19 +1,27 @@
 'use strict';
 
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import HelloWidget from './view/HelloWidget';
+
 
 class ExampleApplication extends Component<{}, {}/*Props*/, {}/*State*/> {
-  // state = {}
-  
+
   render(): ReactElement {
     const message = 'React has been successfully initialized at ' + this.props.initializedAt + '.';
-    return (<p>{message}</p>);
+    const personName = 'Sample Application';
+
+    return (
+      <div>
+        <HelloWidget name={personName} />
+        <p>{message}</p>
+      </div>
+    );
   }
 }
 
-
 window.onload = function () {
   let initStr = new Date().toString();
-  React.render(<ExampleApplication initializedAt={initStr} />, document.getElementById('main'));
+  ReactDOM.render(<ExampleApplication initializedAt={initStr} />, document.getElementById('main'));
 }
 

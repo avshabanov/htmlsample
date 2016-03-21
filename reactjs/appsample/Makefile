@@ -13,6 +13,8 @@ NBIN 		= ./node_modules/.bin
 PORT 		= 8000
 
 
+BABELIFY_PRESETS = [ babelify --presets [ es2015 react stage-0 ] ]
+
 
 # Targets
 
@@ -46,17 +48,17 @@ static:
 	cp -r media/* $(TO)/media
 	cp -r root/* $(TO)/
 
-$(TO)/js/bundle.js: target
-	$(NBIN)/browserify js/main.js -t babelify -o $(TO)/js/bundle.js
+browserify: target
+	$(NBIN)/browserify js/main.js -t $(BABELIFY_PRESETS) -o $(TO)/js/bundle.js
 
-compile: libs static $(TO)/js/bundle.js
+compile: libs static browserify
 
 
 # Helper targets
 
 # Start watcher that automatically recompiles application bundle
 watch: node_modules libs target
-	$(NBIN)/watchify -o $(TO)/js/bundle.js -v -d js/main.js
+	$(NBIN)/watchify js/main.js -o $(TO)/js/bundle.js -v -d -t $(BABELIFY_PRESETS)
 
 # Run unit tests
 test: node_modules target
