@@ -6,6 +6,9 @@
 
 logs
 
+# Node Modules
+node_modules
+
 # Java project convention folder structure
 target
 
