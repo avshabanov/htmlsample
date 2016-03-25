@@ -12,7 +12,7 @@
   <property environment="env"/>
 
   <!-- Configure SDK paths -->
-  <property name="gwt.sdk" location="${env.HOME}/opt/sdk/gwt-2.5.1" />
+  <property name="gwt.sdk" location="${env.HOME}/opt/sdk/gwt" />
   <property name="m2.repo" value="${env.HOME}/.m2/repository" />
 
   <property name="test.classes" value="target/test/classes" />
