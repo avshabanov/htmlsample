@@ -5,6 +5,12 @@ import {request} from 'rsvp-ajax';
 
 class CatalogService {
 
+  getFoo(): Promise {
+    return new Promise((resolve) => {
+      resolve({bar: 42});
+    });
+  }
+
   getItems(): Promise {
     // makes multiple AJAX calls - one for item IDs and the others - for item content
     let promise = request('GET', '/rest/items.json');
