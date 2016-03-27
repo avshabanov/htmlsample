@@ -11,7 +11,7 @@ describe('catalog service test', () => {
 
   it('gets foo', () => {
     // Given:
-    let {default: CatalogService} = require('../service/CatalogService');
+    const {default: CatalogService} = require('../service/CatalogService');
 
     // When:
     let actualVal = '<none>';
@@ -24,7 +24,7 @@ describe('catalog service test', () => {
 
   it('get items', () => {
     // Given:
-    let {default: CatalogService} = require('../service/CatalogService');
+    const {default: CatalogService} = require('../service/CatalogService');
     let actualVal = '<none>';
     const items = [{
       "id": 1,
