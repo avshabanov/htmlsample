@@ -1,40 +1,51 @@
 'use strict';
 
-//jest.autoMockOff(); - even with this uncommented rsvp tests are failing
-
-jest.unmock('../service/CatalogService');
+jest.mock('rsvp-ajax');
 jest.unmock('rsvp');
-
-import CatalogService from '../service/CatalogService';
-
-import rsvp from 'rsvp';
+jest.unmock('../service/CatalogService');
 
 describe('catalog service test', () => {
-//  pit('gets foo', () => {
-//    // Given:
-//
-//    // When:
-//    const promise = CatalogService.getFoo();
-//
-//    // Then:
-//
-//    //return new Promise((resolve) => { resol })
-//    return promise.then((data) => {
-//      expect(1).toBe(1);
-//    });
-//
-//    //return new Promise((r) => {r("asdas");}).then(()=> { expect(1).toBe(1); });
-//  });
+  let ajax;
 
-  pit('testing rsvp promise', () => {
-    return new rsvp.Promise((resolve) => {
-      resolve("getting something");
-    }).then(() => { expect(1).toBe(1); });
+  beforeEach(() => { ajax = require('rsvp-ajax'); });
+
+  it('gets foo', () => {
+    // Given:
+    let {default: CatalogService} = require('../service/CatalogService');
+
+    // When:
+    let actualVal = '<none>';
+    CatalogService.getFoo().then(val => { actualVal = val; });
+    jest.runAllTimers(); // run all promises
+
+    // Then:
+    expect(actualVal).toEqual({bar: 42});
   });
 
-  pit('testing pure promise', () => {
-    return new Promise((resolve) => {
-      resolve("getting something");
-    }).then(() => { expect(1).toBe(1); });
+  it('get items', () => {
+    // Given:
+    let {default: CatalogService} = require('../service/CatalogService');
+    let actualVal = '<none>';
+    const items = [{
+      "id": 1,
+      "name": "First",
+      "genres": ["genre1-1"],
+      "authors": ["author1-1", "author1-2"]
+    }, {
+      "id": 2,
+      "name": "Second",
+      "genres": ["genre2-1", "genre2-2"],
+      "authors": ["author2-1"]
+    }];
+    ajax.__putMockResponse('GET', '/rest/items.json', { "items": [1, 2] });
+    ajax.__putMockResponse('GET', '/rest/item/1.json', items[0]);
+    ajax.__putMockResponse('GET', '/rest/item/2.json', items[1]);
+
+    // When:
+    CatalogService.getItems().then(val => { actualVal = val; });
+    jest.runAllTimers(); // run all promises
+
+    // Then:
+    expect(actualVal).toEqual(items);
   });
 });
