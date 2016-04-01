@@ -2,13 +2,25 @@ package progressive.website.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import progressive.website.service.BookService;
+
+import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/g")
 public final class PublicPageController {
+  @Resource BookService bookService;
 
   @RequestMapping("/index")
-  public String index() {
-    return "page/index";
+  public ModelAndView index() {
+    return new ModelAndView("page/index",
+        "books", bookService.getBooks(0, BookService.DEFAULT_OFFSET));
+  }
+
+  @RequestMapping("/part/bb")
+  public ModelAndView bb() {
+    return new ModelAndView("part/books",
+        "books", bookService.getBooks(0, BookService.DEFAULT_OFFSET));
   }
 }

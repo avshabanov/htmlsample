@@ -4,6 +4,8 @@ import com.truward.brikar.server.launcher.StandardLauncher;
 
 /**
  * Entry point.
+ *
+ * @author Alexander Shabanov
  */
 public final class Launcher {
   public static void main(String[] args) throws Exception {
