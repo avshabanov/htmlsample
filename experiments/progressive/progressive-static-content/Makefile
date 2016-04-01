@@ -6,7 +6,7 @@ FTL     = $(TARGET)/web/freemarker
 NBIN		= ./node_modules/.bin
 PORT		= 8000
 
-.PHONY: clean browserify libs test watch compile server static
+.PHONY: clean browserify uglify libs test watch compile server static
 
 
 # Targets
@@ -39,6 +39,8 @@ watch: node_modules libs target
 browserify: node_modules target
 	$(NBIN)/browserify js/main.js -t babelify -o $(STATIC)/js/bundle.js
 
+uglify: $(STATIC)/js/bundle.js
+	cat $(STATIC)/js/bundle.js | $(NBIN)/uglifyjs -cm > $(STATIC)/js/bundle.min.js
 
 static:
 	mkdir -p $(STATIC)/css

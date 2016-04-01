@@ -18,6 +18,8 @@
 
     "watchify": "^3.4.0",
 
+    "uglify": "0.1.5",
+
     "babel-jest": "^9.0.0",
     "jest-cli": "*"
   },
