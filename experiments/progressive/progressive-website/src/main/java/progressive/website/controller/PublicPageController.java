@@ -12,15 +12,19 @@ import javax.annotation.Resource;
 public final class PublicPageController {
   @Resource BookService bookService;
 
+  @RequestMapping("/login")
+  public String login() {
+    return "page/login";
+  }
+
   @RequestMapping("/index")
   public ModelAndView index() {
     return new ModelAndView("page/index",
         "books", bookService.getBooks(0, BookService.DEFAULT_OFFSET));
   }
 
-  @RequestMapping("/part/bb")
-  public ModelAndView bb() {
-    return new ModelAndView("part/books",
-        "books", bookService.getBooks(0, BookService.DEFAULT_OFFSET));
+  @RequestMapping("/about")
+  public String about() {
+    return "page/about";
   }
 }

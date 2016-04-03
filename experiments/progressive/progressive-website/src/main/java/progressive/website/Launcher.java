@@ -10,7 +10,11 @@ import com.truward.brikar.server.launcher.StandardLauncher;
 public final class Launcher {
   public static void main(String[] args) throws Exception {
     try (final StandardLauncher launcher = new StandardLauncher("classpath:/progressiveWebsite/")) {
-      launcher.setStaticHandlerEnabled(true).start();
+      launcher
+          .setSpringSecurityEnabled(true)
+          .setSessionsEnabled(true)
+          .setStaticHandlerEnabled(true)
+          .start();
     }
   }
 }

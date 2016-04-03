@@ -11,7 +11,6 @@ function setOnclickIfPresent(id, handler) {
 function setHandlers() {
   setOnclickIfPresent('btn-load-more', () => {
     const entries = document.getElementsByClassName('book-entry');
-    console.log('cnt=' + entries.length);
 
     const bookContainerUi = document.getElementById('book-container');
 
@@ -22,13 +21,12 @@ function setHandlers() {
       responseType: 'text'
     });
     promise.then((data) => {
-      console.log('Got data=', data);
       bookContainerUi.insertAdjacentHTML('beforeend', data);
     });
   });
 }
 
 window.onload = () => {
-  console.log('Hello!');
+  console.log('Hello from progressive website!');
   setHandlers();
 }

@@ -16,6 +16,30 @@
   </head>
   <body>
 
+  <#-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header"> <#-- Brand and toggle get grouped for better mobile display -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#g-app-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/g/index">Progressive Website</a>
+      </div>
+      <div class="collapse navbar-collapse" id="g-app-navbar-collapse"> <#-- Collect the nav content for toggling -->
+        <ul class="nav navbar-nav">
+          <li><a href="/g/index">Catalog</a></li>
+          <li class="nav-divider"></li>
+          <li><a href="/g/about">About</a></li>
+          <li class="nav-divider"></li>
+          <li><a href="/g/logout">Logout</a></li>
+        </ul>
+      </div> <#-- /.navbar-collapse -->
+    </div> <#-- /.container -->
+  </nav> <#-- /nav -->
+
   <div id="main-content" class="container">
     <#nested/>
   </div>
@@ -26,4 +50,8 @@
   <script type="text/javascript" src="/js/bundle.js"></script>
 </body>
 </html>
+</#macro>
+
+<#macro heading>
+<!-- TODO: Heading -->
 </#macro>
